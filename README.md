@@ -1,18 +1,42 @@
 # Espaço Livre
 
-Nova aplicação Next.js do marketplace Espaço Livre.
+Marketplace de descoberta e geração de contatos para festas e eventos.
 
-## Arquitetura
+## Produto
+
+O visitante encontra espaços, equipamentos e itens relevantes para seu evento e negocia diretamente com o anunciante pelo WhatsApp.
+
+O Espaço Livre não processa o pagamento da locação, não cobra comissão, não gerencia reserva e não opera repasses.
+
+A receita da plataforma é a assinatura do anunciante.
+
+## Stack
+
 - Next.js App Router
-- Supabase Data API com publishable key
-- Contrato público: marketplace_spaces
-- Solicitações: reservation_requests
-- Assinaturas: advertiser_subscriptions
+- TypeScript
+- Supabase Auth + Data API
+- Vercel
+
+## Núcleo de dados
+
+- `profiles`
+- `spaces` — armazenamento dos anúncios no MVP
+- `marketplace_listings` — contrato público enxuto
+- `advertiser_subscriptions` — assinatura do anunciante
+- `listing_events` — views e cliques no WhatsApp
+
+## Documentação
+
+- `docs/PRODUCT.md`
+- `docs/ARCHITECTURE.md`
+- `docs/CLEANUP.md`
+- `docs/ROADMAP.md`
 
 ## Desenvolvimento
-1. Copie .env.example para .env.local.
-2. Preencha NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY com a chave publishable do projeto Supabase.
-3. npm install
-4. npm run dev
 
-A aplicação antiga permanece preservada no projeto de produção enquanto esta nova base é validada.
+1. Copie `.env.example` para `.env.local`.
+2. Preencha `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`.
+3. Execute `npm install`.
+4. Execute `npm run dev`.
+
+A branch `archive/pre-lean-rebuild-2026-09-19` preserva o estado anterior ao rebuild.

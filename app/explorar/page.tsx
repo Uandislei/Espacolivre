@@ -1,9 +1,25 @@
-"use client";
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
-type Space={id:string;title:string;description:string|null;city:string|null;category:string|null;price_per_hour:number|null;price_per_day:number|null;price_label:string|null};
-export default function Explorar(){const [spaces,setSpaces]=useState<Space[]>([]);const [q,setQ]=useState("");const [loading,setLoading]=useState(true);
-useEffect(()=>{supabase.from("marketplace_spaces").select("id,title,description,city,category,price_per_hour,price_per_day,price_label").order("title").then(({data})=>{setSpaces((data??[]) as Space[]);setLoading(false)})},[]);
-const filtered=spaces.filter(s=>[s.title,s.description,s.city,s.category].filter(Boolean).join(" ").toLowerCase().includes(q.toLowerCase()));
-return <main className="container"><div className="section-title"><div><div className="eyebrow">Marketplace</div><h2>Explorar espaços</h2></div><span className="muted">{spaces.length} disponíveis</span></div><div className="search" style={{maxWidth:"100%",marginBottom:28}}><input value={q} onChange={e=>setQ(e.target.value)} placeholder="Pesquisar por nome, cidade ou categoria..." aria-label="Pesquisar espaços"/></div>{loading?<div className="empty">Carregando espaços...</div>:filtered.length===0?<div className="empty">Nenhum espaço encontrado.</div>:<div className="grid">{filtered.map(s=><Link key={s.id} href={"/espacos/"+s.id} style={{textDecoration:"none",color:"inherit"}}><article className="card"><div className="card-body"><span className="tag">{s.category||"Espaço"}</span><h3>{s.title}</h3><p className="muted">{s.city||"Cidade não informada"}</p><p className="muted">{s.description?.slice(0,130)||"Veja detalhes e disponibilidade."}</p><div className="price">{s.price_label || (s.price_per_hour ? "R$ "+s.price_per_hour+"/hora" : s.price_per_day ? "R$ "+s.price_per_day+"/dia" : "Consulte o valor")}</div></div></article></Link>)}</div>}</main>}
+import { ListingCard } from "@/components/listing-card";
+
+type Listing={id:string;title:string|null;description:string|null;listing_type:string|null;market_category:string|null;market_subcategories:string[]|null;city:string|null;city_name:string|null;image_url:string|null;image_urls:string[]|null;price_label:string|null;price_per_hour:number|null;price_per_day:number|null;capacity:number|null};
+
+const categories=["Espaços","Mesas e cadeiras","Brinquedos","Tendas e estruturas","Equipamentos"];
+
+export default async function Explorar({searchParams}:{searchParams:Promise<{q?:string;cidade?:string}>}) {
+  const params=await searchParams;
+  const q=params.q||"";
+  const city=params.cidade||"";
+  const {data}=await supabase.from("marketplace_listings").select("id,title,description,listing_type,market_category,market_subcategories,city,city_name,image_url,image_urls,price_label,price_per_hour,price_per_day,capacity").order("title");
+  const items=(data||[]) as Listing[];
+  const filtered=items.filter(item=>{
+    const text=[item.title,item.description,item.city,item.city_name,item.market_category,...(item.market_subcategories||[])].filter(Boolean).join(" ").toLowerCase();
+    return (!q||text.includes(q.toLowerCase()))&&(!city||[item.city,item.city_name].filter(Boolean).join(" ").toLowerCase().includes(city.toLowerCase()));
+  });
+  return <main className="page">
+    <section className="page-heading"><span className="eyebrow">Catálogo</span><h1>Encontre tudo para organizar seu evento.</h1><p className="muted">Espaços, equipamentos e itens para festa. Negocie direto com quem anuncia.</p></section>
+    <form className="filters" action="/explorar"><input name="q" defaultValue={q} placeholder="O que você precisa?"/><input name="cidade" defaultValue={city} placeholder="Onde?"/><select name="categoria" defaultValue=""><option value="">Todas as categorias</option>{categories.map(x=><option key={x}>{x}</option>)}</select><button className="button primary" type="submit">Buscar</button></form>
+    <div className="category-row"><Link href="/explorar">Tudo</Link>{categories.map(x=><Link key={x} href={`/explorar?q=${encodeURIComponent(x)}`}>{x}</Link>)}</div>
+    {filtered.length===0?<div className="empty">Nenhum anúncio encontrado.</div>:<div className="listing-grid">{filtered.map(item=><ListingCard key={item.id} listing={item}/>)}</div>}
+  </main>;
+}
