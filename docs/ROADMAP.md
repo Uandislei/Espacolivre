@@ -23,13 +23,13 @@
 - [ ] Cadastro de perfil.
 - [x] Cadastro de anúncio.
 - [ ] Upload/galeria.
-- [ ] Aprovação.
+- [x] Aprovação.
 - [x] Edição do anúncio.
 - [x] Dashboard.
 
 ## Fase 3 — Receita
-- [ ] Definir Free/Premium.
-- [ ] Assinatura.
+- [ ] Definir Free/Premium. *(estrutura pronta; cobrança do provedor ainda não conectada)*
+- [ ] Assinatura. *(aguarda provedor de cobrança e credenciais)*
 - [ ] Bloqueio/benefícios por plano.
 - [ ] Status da assinatura.
 - [ ] Métricas do anunciante.
