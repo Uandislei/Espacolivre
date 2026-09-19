@@ -14,7 +14,7 @@ export default function EditarAnuncio() {
     (async () => {
       const { data:{ user } } = await supabase.auth.getUser();
       if (!user) { router.replace("/entrar"); return; }
-      const { data, error } = await supabase.from("spaces").select("title,description,market_category,city,state,price_label,whatsapp").eq("id", id).eq("owner_id", user.id).maybeSingle();
+      const { data, error } = await supabase.from("spaces").select("title,description,market_category,city,state,undefined").eq("id", id).eq("owner_id", user.id).maybeSingle();
       if (error || !data) { router.replace("/painel"); return; }
       setForm({ title:data.title||"", description:data.description||"", market_category:data.market_category||"", city:data.city||"", state:data.state||"", price_label:data.price_label||"", image_url:data.image_url||"", whatsapp:data.whatsapp||"" });
       setBusy(false);
