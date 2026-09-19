@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default function Entrar(){return <main className="container"><div className="panel" style={{maxWidth:560,margin:"0 auto"}}><div className="eyebrow">Conta</div><h1>Entrar</h1><p className="muted">A autenticação Supabase será ativada nesta etapa do aplicativo.</p><div className="actions"><Link className="button primary" href="/explorar">Continuar explorando</Link></div></div></main>}
