@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default async function RequestPage({params}:{params:Promise<{id:string}>}){const {id}=await params;return <main className="container"><div className="panel" style={{maxWidth:700,margin:"0 auto"}}><div className="eyebrow">Solicitação</div><h1>Solicitar este espaço</h1><p className="muted">O formulário autenticado será conectado ao fluxo reservation_requests na próxima etapa.</p><p className="muted">Espaço: {id}</p><Link className="button primary" href="/entrar">Entrar para continuar</Link></div></main>}
