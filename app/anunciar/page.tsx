@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default function Anunciar(){return <main className="container"><div className="panel"><div className="eyebrow">Para anunciantes</div><h1>Anuncie seu espaço</h1><p className="muted">O novo fluxo será baseado em assinatura mensal, cadastro de espaços e recebimento de solicitações.</p><Link className="button primary" href="/entrar">Entrar para anunciar</Link></div></main>}
