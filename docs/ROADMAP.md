@@ -5,27 +5,27 @@
 - [x] Documentar arquitetura.
 - [x] Separar branch de arquivo do estado anterior.
 - [ ] Limpar frontend antigo.
-- [ ] Definir contrato público enxuto.
-- [ ] Criar métricas.
-- [ ] Ajustar segurança/RLS.
+- [x] Definir contrato público enxuto.
+- [x] Criar métricas.
+- [x] Ajustar segurança/RLS.
 
 ## Fase 1 — Marketplace público
-- [ ] Home nova.
-- [ ] Busca por cidade/necessidade.
-- [ ] Categorias.
-- [ ] Cards de anúncios.
-- [ ] Página do anúncio.
-- [ ] WhatsApp.
-- [ ] Responsividade.
+- [x] Home nova.
+- [x] Busca por cidade/necessidade.
+- [x] Categorias.
+- [x] Cards de anúncios.
+- [x] Página do anúncio.
+- [x] WhatsApp.
+- [x] Responsividade.
 
 ## Fase 2 — Anunciante
-- [ ] Autenticação.
+- [x] Autenticação.
 - [ ] Cadastro de perfil.
-- [ ] Cadastro de anúncio.
+- [x] Cadastro de anúncio.
 - [ ] Upload/galeria.
 - [ ] Aprovação.
-- [ ] Edição do anúncio.
-- [ ] Dashboard.
+- [x] Edição do anúncio.
+- [x] Dashboard.
 
 ## Fase 3 — Receita
 - [ ] Definir Free/Premium.
